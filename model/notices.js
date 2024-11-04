@@ -16,4 +16,4 @@ const Notices = new Schema ({
     }
 }, { timestamps: true })
 
-export default model('Noyices', Notices)
+export default model('Notices', Notices)
