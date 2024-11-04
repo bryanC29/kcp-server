@@ -25,7 +25,9 @@ app.post('/', (req, res) => {
 })
 
 import CertificateRoute from './routes/certificate.js';
+import NotificationRoute from './routes/notification.js';
 
 app.use('/certificate', CertificateRoute);
+app.use('/notification', NotificationRoute);
 
 export default app;
