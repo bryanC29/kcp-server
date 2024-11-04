@@ -12,7 +12,7 @@ app.use(express.json({
     limit: '5mb',
 }))
 
-app.use(express.urlencoded({
+app.use(urlencoded({
     extended: true,
 }))
 
@@ -23,5 +23,9 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
     res.status(200).json({'message': 'Post request received'});
 })
+
+import CertificateRoute from './routes/certificate.js';
+
+app.use('/certificate', CertificateRoute);
 
 export default app;

@@ -10,6 +10,7 @@ const Certificates = new Schema ({
     },
     dateIssued : {
         type: Date,
+        default: Date.now,
     },
 }, { timestamps: true, })
 
