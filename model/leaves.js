@@ -12,6 +12,7 @@ const Leaves = new Schema ({
     },
     leaveDate : {
         type : Date,
+        default: Date.now,
     },
     leaveStatus : {
         type : String,
