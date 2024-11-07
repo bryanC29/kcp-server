@@ -29,11 +29,13 @@ import NotificationRoute from './routes/notification.js';
 import NoticeRoute from './routes/notice.js';
 import LeaveRoute from './routes/leave.js';
 import APIRoute from './routes/api.js';
+import VerificationRoute from './routes/verification.js';
 
 app.use('/certificate', CertificateRoute);
 app.use('/notification', NotificationRoute);
 app.use('/notice', NoticeRoute);
 app.use('/leave', LeaveRoute);
 app.use('/api', APIRoute);
+app.use('/verify', VerificationRoute);
 
 export default app;
