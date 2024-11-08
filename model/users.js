@@ -13,6 +13,10 @@ const Users = new Schema ({
         type: String,
         required : true,
     },
+    emailVerified : {
+        type: Boolean,
+        default : false,
+    },
     password : {
         type : String,
         required : true,
@@ -24,6 +28,10 @@ const Users = new Schema ({
     },
     contactNumber : {
         type : Number,
+    },
+    contactNumberVerified : {
+        type : Boolean,
+        default : false,
     },
     address : {
         type : String,
@@ -52,6 +60,21 @@ const Users = new Schema ({
     },
     dateOfJoining : {
         type: Date,
+        default: Date.now,
+    },
+    bankDetail : {
+        accNo : {
+            type : String,
+        },
+        ifscCode : {
+            type : String,
+        },
+        bankName : {
+            type : String,
+        },
+        upiID : {
+            type : String,
+        },
     }
 })
 
