@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 
+testCases
+
 .env
 package-lock.json
 
