@@ -14,7 +14,7 @@ import {
     userProfileUpdate,
     userBankDetailUpdate,
     userPasswordUpdate
-} from "../controller/user";
+} from "../controller/user.js";
 
 const router = Router();
 
