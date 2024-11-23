@@ -40,6 +40,7 @@ export const deviceRegister = async (req, res) => {
 
         const token = jwt.sign({
             MACAddress: newDevice.MACAddress,
+            deviceID: newDevice._id,
         }, process.env.JWT_SECRET, {
             expiresIn: '7d',
         })
@@ -73,7 +74,8 @@ export const deviceLogin = async (req, res) => {
             return res.status(400).json({ message: 'Invalid MAC Address' });
     
         const token = jwt.sign({
-            id: device._id,
+            MACAddress: device.MACAddress,
+            deviceID: device._id,
         }, process.env.JWT_SECRET, {
             expiresIn: '7d',
         })
@@ -106,7 +108,7 @@ export const deviceUserAuth = async (req, res) => {
             return res.status(400).json({ message: 'Invalid Credentials' });
 
         const token = jwt.sign({
-            id: user._id,
+            userID: user._id,
         }, process.env.JWT_SECRET, {
             expiresIn: '1h',
         })
