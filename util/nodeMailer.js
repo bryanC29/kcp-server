@@ -14,8 +14,8 @@ export const mailingService = async (user, message) => {
     try{
         const result = await transporter.sendMail({
             from: {
-                name: 'Kris Computer Point',
-                address: 'bryan.christy29@gmail.com',
+                name: process.env.MAIL_FROM,
+                address: process.env.MAIL_EMAIL,
             },
             to: user.email,
             subject: message.subject,
