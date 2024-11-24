@@ -2,6 +2,13 @@ import { Router } from "express";
 import { verifyToken } from "../middleware/tokenVerification.js";
 
 import {
+    verifyStudent,
+    verifyTeacher,
+    verifyManager,
+    verifyAdmin
+} from "../middleware/roleVerification.js";
+
+import {
     login,
     logout,
     register,
@@ -20,10 +27,10 @@ import {
 const router = Router();
 
 router.use('/profile', verifyToken);
-router.use('/admin', verifyToken);
-router.use('/manager', verifyToken);
-router.use('/teacher', verifyToken);
-router.use('/student', verifyToken);
+router.use('/admin', verifyAdmin);
+router.use('/manager', verifyManager);
+router.use('/teacher', verifyTeacher);
+router.use('/student', verifyStudent);
 router.use('/bankdetails', verifyToken);
 router.use('/profileupdate', verifyToken);
 router.use('/updatebank', verifyToken);
