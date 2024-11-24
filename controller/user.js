@@ -147,7 +147,7 @@ export const forgotPassword = async (req, res) => {
 			const token = jwt.sign({
 				userID: user.userID,
 			}, process.env.JWT_SECRET, {
-				expiresIn: '1d',
+				expiresIn: '5m',
 			});
 
 			const resetMessage = {
