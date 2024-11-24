@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import { verifyToken } from "../middleware/tokenVerification.js";
+
 import {
     verifyEmail,
     verifyUser,
@@ -10,6 +12,10 @@ import {
 } from "../controller/verification.js";
 
 const router = Router();
+
+router.use('/email', verifyToken);
+router.use('/number', verifyToken);
+router.use('/aadhar', verifyToken);
 
 router.route('/email/:token').get(verifyEmail);
 router.route('/user/:userID').get(verifyUser);

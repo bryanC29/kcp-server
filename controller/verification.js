@@ -59,7 +59,7 @@ export const verifyUser = async (req, res) => {
 }
 
 export const requestEmailVerify = async (req, res) => {
-	const { userID } = req.body;
+	const { userID } = req.user;
 	
 	try{
 		const user = Users.findOne({ userID: userID });
@@ -94,7 +94,7 @@ export const requestEmailVerify = async (req, res) => {
 }
 
 export const requestNumberVerify = async (req, res) => {
-	const { userID } = req.body;
+	const { userID } = req.user;
 	
 	try{
 		const user = Users.findOne({ userID: userID });
@@ -148,7 +148,8 @@ export const validateOTP = async (req, res) => {
 }
 
 export const aadharAuth = async (req, res) => {
-	const { aadharNumber, userID } = req.body;
+	const { userID } = req.user;
+	const { aadharNumber } = req.body;
 
 	try {
 		const user = await Users.findOne({ userID: userID });
