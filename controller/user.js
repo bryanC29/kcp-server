@@ -169,7 +169,7 @@ export const forgotPassword = async (req, res) => {
 }
 
 export const getProfile = async (req, res) => {
-	const { userID } = req.body;
+	const { userID } = req.user;
 
 	try{
 		const user = await Users.findOne({ userID: userID });
@@ -201,7 +201,7 @@ export const getProfile = async (req, res) => {
 }
 
 export const getAdminProfile = async (req, res) => {
-	const { userID } = req.body;
+	const { userID } = req.user;
 	
 	try{
 		const user = await Users.findOne({ userID: userID });
@@ -235,7 +235,7 @@ export const getAdminProfile = async (req, res) => {
 }
 
 export const getManagerProfile = async (req, res) => {
-	const { userID } = req.body;
+	const { userID } = req.user;
 	
 	try{
 		const user = await Users.findOne({ userID: userID });
@@ -269,7 +269,7 @@ export const getManagerProfile = async (req, res) => {
 }
 
 export const getTeacherProfile = async (req, res) => {
-	const { userID } = req.body;
+	const { userID } = req.user;
 	
 	try{
 		const user = await Users.findOne({ userID: userID });
@@ -307,7 +307,7 @@ export const getTeacherProfile = async (req, res) => {
 }
 
 export const getStudentProfile = async (req, res) => {
-	const { userID } = req.body;
+	const { userID } = req.user;
 	
 	try {
 		const user = await Users.findOne({ userID: userID });
@@ -344,7 +344,7 @@ export const getStudentProfile = async (req, res) => {
 }
 
 export const getBankDetails = async (req, res) => {
-	const { userID } = req.body;
+	const { userID } = req.user;
 	
 	try{
 		const user = await Users.findOne({ userID: userID });
@@ -372,7 +372,7 @@ export const getBankDetails = async (req, res) => {
 }
 
 export const userProfileUpdate = async (req, res) => {
-	const { userID, address, gender, dateOfBirth, highestEducation } = req.body;
+	const { userID, address, gender, dateOfBirth, highestEducation } = req.user;
 	
 	try {
 		const user = await Users.findOne({ userID: userID });
@@ -396,7 +396,7 @@ export const userProfileUpdate = async (req, res) => {
 }
 
 export const userBankDetailUpdate = async (req, res) => {
-	const { userID, accNo, ifscCode, bankName, upiID } = req.body;
+	const { userID, accNo, ifscCode, bankName, upiID } = req.user;
 	
 	try {
 		const user = await Users.findOne({ userID: userID });
@@ -420,7 +420,7 @@ export const userBankDetailUpdate = async (req, res) => {
 }
 
 export const userPasswordUpdate = async (req, res) => {
-	const { userID, newPassword, oldPassword } = req.body;
+	const { userID, newPassword, oldPassword } = req.user;
 	
 	try {
 		const user = await Users.findOne({ userID: userID });
