@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 
+import { renewToken } from '../util/tokenRenew';
+
 export const verifyToken = (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
 
@@ -9,9 +11,22 @@ export const verifyToken = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        const currTime = Math.floor(Date.now() / 1000)
         
-        req.user = decoded;
-        
+        if (decoded.exp && decoded.exp - currTime <= 300) {
+            const newToken = renewToken(decoded);
+
+            res.cookie('userToken', newToken, {
+                httpOnly: true,
+                maxAge: 24 * 60 * 60 * 1000,
+            })
+
+            req.user = newToken;
+        } else {
+            req.user = decoded;
+        }
+
         next();
     }
     
