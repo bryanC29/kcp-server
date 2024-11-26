@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { renewToken } from '../util/tokenRenew';
+import { renewToken } from '../util/tokenRenew.js';
 
 export const verifyToken = (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
