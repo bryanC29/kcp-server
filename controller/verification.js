@@ -34,10 +34,10 @@ export const verifyEmail = async (req, res) => {
 }
 
 export const verifyUser = async (req, res) => {
-	const { userID } = req.body;
+	const { userID } = req.params;
 
 	try {
-		const user = Users.findOne({ userID: userID });
+		const user = await Users.findOne({ userID: userID });
 
 		if(!user) {
 			return res.status(404).json({ message: "User not found" });
