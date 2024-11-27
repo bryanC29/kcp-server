@@ -3,13 +3,13 @@ import jwt from 'jsonwebtoken';
 import { renewToken } from '../util/tokenRenew.js';
 
 export const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
-
-    if (!token) {
-        return res.status(403).json({ message: 'Access denied. No token provided.' });
-    }
-
     try {
+        const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
+    
+        if (!token) {
+            return res.status(403).json({ message: 'Access denied. No token provided.' });
+        }
+
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         const currTime = Math.floor(Date.now() / 1000)

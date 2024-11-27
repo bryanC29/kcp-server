@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
 
 export const verifyStudent = (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
-
-    if (!token) {
-        return res.status(403).json({ message: 'Access denied. No token provided.' });
-    }
-
     try {
+        const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
+    
+        if (!token) {
+            return res.status(403).json({ message: 'Access denied. No token provided.' });
+        }
+
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         if(decoded.role != 'Student')
@@ -25,13 +25,12 @@ export const verifyStudent = (req, res, next) => {
 };
 
 export const verifyTeacher = (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
-
-    if (!token) {
-        return res.status(403).json({ message: 'Access denied. No token provided.' });
-    }
-
     try {
+        const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
+    
+        if (!token) {
+            return res.status(403).json({ message: 'Access denied. No token provided.' });
+        }
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
         if(decoded.role != 'Teacher')
@@ -49,13 +48,13 @@ export const verifyTeacher = (req, res, next) => {
 };
 
 export const verifyManager = (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
-    
-    if (!token) {
-        return res.status(403).json({ message: 'Access denied. No token provided.' });
-    }
-    
     try {
+        const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
+        
+        if (!token) {
+            return res.status(403).json({ message: 'Access denied. No token provided.' });
+        }
+        
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
         if(decoded.role != 'Manager')
@@ -73,13 +72,13 @@ export const verifyManager = (req, res, next) => {
 };
 
 export const verifyAdmin = (req, res, next) => {
-    const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
-    
-    if (!token) {
-        return res.status(403).json({ message: 'Access denied. No token provided.' });
-    }
-    
     try {
+        const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
+        
+        if (!token) {
+            return res.status(403).json({ message: 'Access denied. No token provided.' });
+        }
+        
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
         if(decoded.role != 'Admin')
