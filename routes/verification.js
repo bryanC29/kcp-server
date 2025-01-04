@@ -19,10 +19,10 @@ router.use('/aadhar', verifyToken);
 
 router.route('/email/:token').get(verifyEmail);
 router.route('/user/:userID').get(verifyUser);
+router.route('/otp').get(validateOTP);
 
 router.route('/email').post(requestEmailVerify);
 router.route('/number').post(requestNumberVerify);
-router.route('/otp').post(validateOTP);
 router.route('/aadhar').post(aadharAuth);
 
 export default router;
