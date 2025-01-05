@@ -7,7 +7,6 @@ const Teachers = new Schema ({
     },
     courseTeaching : {
         type: String,
-        required: true,
     },
     specialization : {
         type: String,
