@@ -9,6 +9,12 @@ import Students from '../model/students.js';
 
 import { userIdGen } from '../util/idGen.js';
 import { mailingService } from '../util/nodeMailer.js';
+import {
+	registerStudent,
+	registerTeacher,
+	registerManager,
+	registerAdmin,
+} from '../util/roleRegister.js';
 
 export const login = async (req, res) => {
 	const { email, password } = req.body;
@@ -84,6 +90,15 @@ export const register = async (req, res) => {
 			centre
 		});
 		await newUser.save();
+
+		if(role === 'Student')
+			await registerStudent(newUser.userID);
+		else if(role === 'Teacher')
+			await registerTeacher(newUser.userID);
+		else if(role === 'Manager')
+			await registerManager(newUser.userID);
+		else if(role === 'Admin')
+			await registerAdmin(newUser.userID);
 		
 		const token = jwt.sign({
 			userID: newUser.userID,
@@ -339,7 +354,7 @@ export const getStudentProfile = async (req, res) => {
 	
 	catch(err) {
 		console.log(err);
-		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
+		return res.status(500).json({ message: 'Cannot get student profile at the moment. Please try again later' });
 	}
 }
 
@@ -356,10 +371,10 @@ export const getBankDetails = async (req, res) => {
 			name: user.name,
 			role: user.role,
 			centre: user.centre,
-			accountNumber: user.bankDetail.accNo,
-			ifsc: user.bankDetail.ifscCode,
-			bank: user.bankDetail.bankName,
-			upi: user.bankDetail.upiID,
+			accountNumber: user.bankDetail.accNo ? user.bankDetail.accNo: 'Not provided',
+			ifsc: user.bankDetail.ifscCode ? user.bankDetail.ifscCode: 'Not provided',
+			bank: user.bankDetail.bankName ? user.bankDetail.bankName: 'Not provided',
+			upi: user.bankDetail.upiID ? user.bankDetail.upiID: 'Not provided',
 		}
 		
 		return res.status(200).json({ message: 'User fetched successfully', returnedUser });
@@ -367,12 +382,13 @@ export const getBankDetails = async (req, res) => {
 
 	catch(err) {
 		console.log(err);
-		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
+		return res.status(500).json({ message: 'Cannot get profile bank details at the moment. Please try again later' });
 	}
 }
 
 export const userProfileUpdate = async (req, res) => {
-	const { userID, address, gender, dateOfBirth, highestEducation } = req.user;
+	const { userID } = req.user;
+	const { address, gender, dateOfBirth, highestEducation } = req.body;
 	
 	try {
 		const user = await Users.findOne({ userID: userID });
@@ -396,7 +412,8 @@ export const userProfileUpdate = async (req, res) => {
 }
 
 export const userBankDetailUpdate = async (req, res) => {
-	const { userID, accNo, ifscCode, bankName, upiID } = req.user;
+	const { userID } = req.user;
+	const { accNo, ifscCode, bankName, upiID } = req.body;
 	
 	try {
 		const user = await Users.findOne({ userID: userID });
@@ -420,7 +437,8 @@ export const userBankDetailUpdate = async (req, res) => {
 }
 
 export const userPasswordUpdate = async (req, res) => {
-	const { userID, newPassword, oldPassword } = req.user;
+	const { userID } = req.user;
+	const { newPassword, oldPassword } = req.body;
 	
 	try {
 		const user = await Users.findOne({ userID: userID });

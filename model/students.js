@@ -7,11 +7,9 @@ const Students = new Schema ({
     },
     courseEnrolled : {
         type: String,
-        required: true,
     },
     timeAllotted : {
         type: Number,
-        required: true,
     },
     certificates : [
         {
