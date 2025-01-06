@@ -34,6 +34,7 @@ import LeaveRoute from '../routes/leave.js';
 import APIRoute from '../routes/api.js';
 import VerificationRoute from '../routes/verification.js';
 import UserRoute from '../routes/user.js';
+import CentreRoute from '../routes/centre.js';
 
 app.use('/certificate', CertificateRoute);
 app.use('/notification', NotificationRoute);
@@ -42,5 +43,6 @@ app.use('/leave', LeaveRoute);
 app.use('/api', APIRoute);
 app.use('/verify', VerificationRoute);
 app.use('/user', UserRoute);
+app.use('/centre', CentreRoute);
 
 export default app;
