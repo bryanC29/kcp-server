@@ -13,7 +13,6 @@ export const allLeaves = async (req, res) => {
     }
 
     catch (err) {
-        console.log(err);
         return res.status(500).json({ message: 'Leaves cannot be fetched at the moment. Try again later' });
     }
 }
@@ -32,7 +31,6 @@ export const watchLeaves = async (req, res) => {
     }
     
     catch (err) {
-        console.log(err);
         return res.status(500).json({ message: 'Leaves cannot be fetched at the moment. Try again later' });
     }
 }
@@ -51,7 +49,6 @@ export const status = async (req, res) => {
     }
     
     catch (err) {
-        console.log(err);
         return res.status(500).json({ message: 'Leaves cannot be fetched at the moment. Try again later' });
     }
 }
@@ -73,7 +70,6 @@ export const approveLeave = async (req, res) => {
     }
     
     catch (err) {
-        console.log(err);
         return res.status(500).json({ message: 'Leaves cannot be approved at the moment. Try again later' });
     }
 }
@@ -95,7 +91,6 @@ export const declineLeave = async (req, res) => {
     }
     
     catch (err) {
-        console.log(err);
         return res.status(500).json({ message: 'Leaves cannot be fetched at the moment. Try again later' });
     }
 }
@@ -124,7 +119,6 @@ export const applyLeave = async (req, res) => {
     }
     
     catch (err) {
-        console.log(err);
         return res.status(500).json({ message: 'Leaves cannot be fetched at the moment. Try again later' });
     }
 }

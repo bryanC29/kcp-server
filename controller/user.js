@@ -6,6 +6,7 @@ import Admins from '../model/admins.js';
 import Managers from '../model/managers.js';
 import Teachers from '../model/teachers.js';
 import Students from '../model/students.js';
+import Centres from '../model/centres.js';
 
 import { userIdGen } from '../util/idGen.js';
 import { mailingService } from '../util/nodeMailer.js';
@@ -47,7 +48,6 @@ export const login = async (req, res) => {
 	}
 
 	catch(err) {
-		console.log(err);
 		res.status(500).json({ message: 'Internal Server error while logging in' });
 	}
 }
@@ -59,7 +59,6 @@ export const logout = async (req, res) => {
 	}
 
 	catch(err) {
-		console.log(err);
 		res.status(500).json({ message: 'Internal Server error during logout' });
 	}
 }
@@ -69,6 +68,11 @@ export const register = async (req, res) => {
 
 	if(!name || !email || !password || !contactNumber || !centre)
 		return res.status(400).json({ message: 'Enter all credentials' });
+
+	const centreExists = await Centres.findOne({ centreID: centre });
+
+	if(!centreExists)
+		return res.status(400).json({ message: 'Centre does not exist' });
 
 	try{
 
@@ -119,7 +123,6 @@ export const register = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		res.status(500).json({ message: 'Internal Server error during Signup' });
 	}
 }
@@ -178,7 +181,6 @@ export const forgotPassword = async (req, res) => {
 	}
 
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot reset password at the moment. Please try again later' });
 	}
 }
@@ -210,7 +212,6 @@ export const getProfile = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
 	}
 }
@@ -244,7 +245,6 @@ export const getAdminProfile = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
 	}
 }
@@ -278,7 +278,6 @@ export const getManagerProfile = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
 	}
 }
@@ -316,7 +315,6 @@ export const getTeacherProfile = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
 	}
 }
@@ -353,7 +351,6 @@ export const getStudentProfile = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot get student profile at the moment. Please try again later' });
 	}
 }
@@ -381,7 +378,6 @@ export const getBankDetails = async (req, res) => {
 	}
 
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot get profile bank details at the moment. Please try again later' });
 	}
 }
@@ -406,7 +402,6 @@ export const userProfileUpdate = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
 	}
 }
@@ -431,7 +426,6 @@ export const userBankDetailUpdate = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot update bank details at the moment. Please try again later' });
 	}
 }
@@ -459,7 +453,6 @@ export const userPasswordUpdate = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Cannot reset password at the moment. Please try again later' });
 	}
 }

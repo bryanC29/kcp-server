@@ -5,6 +5,7 @@ export const mailingService = async (user, message) => {
         host: process.env.MAIL_HOST,
         port: process.env.MAIL_PORT,
         secure: process.env.MAIL_PORT != 587,
+        
         auth: {
             user: process.env.MAIL_AUTH_USER,
             pass: process.env.MAIL_AUTH_PASSWORD
@@ -24,15 +25,13 @@ export const mailingService = async (user, message) => {
         });
 
         if(result) {
-            console.log('Email sent successfully');
-            console.log(result.messageId);
+            return result.messageId;
         } else {
-            console.log('Error sending email');
+            return null;
         }
     }
 
     catch(err) {
-        console.log('Error sending email:', err);
+        return null;
     }
-
 }

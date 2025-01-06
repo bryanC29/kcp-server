@@ -7,7 +7,6 @@ export const allPublicNotice = async (req, res) => {
     }
     
     catch (err) {
-        console.log(err)
         return res.status(500).json({ message: "Notices cannot be fetched at this moment" });
     }
 }
@@ -23,7 +22,6 @@ export const allNotice = async (req, res) => {
         }
         
         catch (err) {
-            console.log(err)
             return res.status(500).json({ message: "Notices cannot be fetched at this moment" });
         }
     } else {
@@ -40,7 +38,6 @@ export const allNotice = async (req, res) => {
             }
 
             catch (err) {
-                console.log(err);
                 return res.status(500).json({ message: 'Cannot fetch notices at this moment' });
             }
         } else {
@@ -69,7 +66,6 @@ export const createNotice = async (req, res) => {
     }
 
     catch(err) {
-        console.log(err);
         return res.status(500).json({ message: 'Cannot create notice at this moment' });
     }
 }
@@ -94,7 +90,6 @@ export const editNotice = async (req, res) => {
     }
     
     catch(err) {
-        console.log(err);
         return res.status(500).json({ message: 'Cannot create notice at this moment' });
     }
 }
@@ -113,7 +108,6 @@ export const deleteNotice = async (req, res) => {
     }
 
     catch(err) {
-        console.log(err);
         return res.status(500).json({ message: 'Cannot delete notice at this moment' });
     }
 }

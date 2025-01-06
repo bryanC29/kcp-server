@@ -28,7 +28,6 @@ export const verifyEmail = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Internal server error' });
 	}
 }
@@ -53,7 +52,6 @@ export const verifyUser = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Internal server error occurred during user verification. Please try again later' });
 	}
 }
@@ -88,7 +86,6 @@ export const requestEmailVerify = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Could not initiate email verification at the moment' });
 	}
 }
@@ -113,7 +110,6 @@ export const requestNumberVerify = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Could not initiate phone verification at the moment' });
 	}
 }
@@ -142,7 +138,6 @@ export const validateOTP = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Could not initiate contact number verification at the moment' });
 	}
 }
@@ -165,7 +160,6 @@ export const aadharAuth = async (req, res) => {
 	}
 	
 	catch(err) {
-		console.log(err);
 		return res.status(500).json({ message: 'Could not initiate email verification at the moment' });
 	}
 }

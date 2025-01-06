@@ -18,7 +18,6 @@ export const verifyCertificate = async (req, res) => {
     }
 
     catch(err) {
-        console.log(err);
         return res.status(500).json({ message: "Error verifying certificate" });
     }
 }
@@ -49,7 +48,6 @@ export const generateCertificate = async (req, res) => {
     }
 
     catch(err) {
-        console.log(err);
         return res.status(500).json({ message: "Error generating certificate. Please try again later" });
     }
 }

@@ -18,7 +18,6 @@ export const allNotification = async (req, res) => {
     }
 
     catch (err) {
-        console.log(err);
         return res.status(500).json({ message: 'Notifications cannot be fetched. Try again later' });
     }
 }
@@ -44,7 +43,6 @@ export const updateNotification = async (req, res) => {
     }
     
     catch (err) {
-        console.log(err);
         return res.status(500).json({ message: 'Notifications cannot be fetched. Try again later' });
     }
 }

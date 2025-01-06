@@ -11,7 +11,6 @@ export const renewToken = (payload) => {
     }
     
     catch (error) {
-        console.log(`Token renewal failed: ${error}`);
         return null;
     }
 };

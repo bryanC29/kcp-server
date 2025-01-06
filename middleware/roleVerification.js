@@ -19,7 +19,6 @@ export const verifyStudent = (req, res, next) => {
     }
     
     catch (err) {
-        console.error(err);
         return res.status(401).json({ message: 'Invalid or expired token' });
     }
 };
@@ -42,7 +41,6 @@ export const verifyTeacher = (req, res, next) => {
     }
     
     catch (err) {
-        console.error(err);
         return res.status(401).json({ message: 'Invalid or expired token' });
     }
 };
@@ -66,7 +64,6 @@ export const verifyManager = (req, res, next) => {
     }
     
     catch (err) {
-        console.error(err);
         return res.status(401).json({ message: 'Invalid or expired token' });
     }
 };
@@ -90,7 +87,6 @@ export const verifyAdmin = (req, res, next) => {
     }
     
     catch (err) {
-        console.error(err);
         return res.status(401).json({ message: 'Invalid or expired token' });
     }
 };

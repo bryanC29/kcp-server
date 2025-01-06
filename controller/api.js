@@ -12,7 +12,6 @@ export const allTrustedNotice = async (req, res) => {
     }
     
     catch (err) {
-        console.log(err)
         return res.status(500).json({ message: "Notices cannot be fetched at this moment" });
     }
 }
@@ -56,7 +55,6 @@ export const deviceRegister = async (req, res) => {
     }
 
     catch(err) {
-        console.log(err)
         return res.status(500).json({ message: 'Device could not be registered' })
     }
 }
@@ -90,7 +88,6 @@ export const deviceLogin = async (req, res) => {
     }
     
     catch(err) {
-        console.log(err);
         res.status(500).json({ message: 'Internal Server error while logging in' });
     }
 }
@@ -123,7 +120,6 @@ export const deviceUserAuth = async (req, res) => {
     }
 
     catch(err) {
-        console.log(err);
         res.status(500).json({ message: 'Internal Server error while logging in' });
     }
 }
@@ -135,7 +131,6 @@ export const deviceDeauth = async (req, res) => {
     }
 
     catch(err) {
-        console.log(err);
         res.status(500).json({ message: 'Internal Server error during logout' });
     }
 }
@@ -147,7 +142,6 @@ export const deviceUserLogout = async (req, res) => {
     }
     
     catch(err) {
-        console.log(err);
         res.status(500).json({ message: 'Internal Server error during logout' });
     }
 }
