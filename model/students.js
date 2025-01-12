@@ -5,9 +5,19 @@ const Students = new Schema ({
         type: String,
         required: true,
     },
-    courseEnrolled : {
-        type: String,
-    },
+    courseEnrolled : [
+        {
+            courseID : {
+                type: String,
+            },
+            courseStart : {
+                type: String,
+            },
+            courseEnd : {
+                type: String,
+            },
+        }
+    ],
     timeAllotted : {
         type: Number,
     },

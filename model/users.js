@@ -62,6 +62,11 @@ const Users = new Schema ({
         type: Date,
         default: Date.now,
     },
+    accountStatus : {
+        type: String,
+        enum: ['Pending', 'New', 'Confirmed'],
+        default: 'Pending',
+    },
     bankDetail : {
         accNo : {
             type : String,
