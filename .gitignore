@@ -16,6 +16,7 @@ testCases
 
 .env
 package-lock.json
+assets/kcp_certificate_template.png
 
 # Editor directories and files
 .vscode/*
