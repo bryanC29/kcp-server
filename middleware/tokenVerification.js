@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 
 import { renewToken } from '../util/tokenRenew.js';
 
+import Users from '../models/userModel.js';
+
 export const verifyToken = (req, res, next) => {
     try {
         const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
@@ -11,6 +13,14 @@ export const verifyToken = (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = Users.findOne({ email: decoded.email });
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid or expired token' });
+        }
+
+        if (!(decoded.role === user.role))
+            return res.status(403).json({ message: 'Access denied. You are not a ' + role });
 
         const currTime = Math.floor(Date.now() / 1000)
         
