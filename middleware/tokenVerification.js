@@ -21,6 +21,8 @@ export const verifyToken = (req, res, next) => {
         if (!(decoded.role === user.role))
             return res.status(403).json({ message: 'Access denied. You are not a ' + role });
 
+        req.user = decoded;
+
         const currTime = Math.floor(Date.now() / 1000)
         
         if (decoded.exp && decoded.exp - currTime <= 300) {
@@ -30,10 +32,6 @@ export const verifyToken = (req, res, next) => {
                 httpOnly: true,
                 maxAge: 24 * 60 * 60 * 1000,
             })
-
-            req.user = newToken;
-        } else {
-            req.user = decoded;
         }
 
         next();
