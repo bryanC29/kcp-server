@@ -8,7 +8,10 @@ const Centres = new Schema ({
     address : {
         type: String,
     },
-    admin : {
+    adminID : {
+        type: String,
+    },
+    managerID : {
         type: String,
     },
     teachers : [
