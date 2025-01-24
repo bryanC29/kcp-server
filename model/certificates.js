@@ -5,12 +5,11 @@ const Certificates = new Schema ({
         type: String,
         required: true,
     },
-    course : {
+    courseID : {
         type: String,
     },
     dateIssued : {
-        type: Date,
-        default: Date.now,
+        type: String,
     },
 }, { timestamps: true, })
 
