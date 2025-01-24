@@ -3,18 +3,13 @@ import jwt from 'jsonwebtoken';
 
 import Users from "../model/users.js";
 import Admins from '../model/admins.js';
-import Managers from '../model/managers.js';
-import Teachers from '../model/teachers.js';
 import Students from '../model/students.js';
-import Centres from '../model/centres.js';
 import Notifications from '../model/notifications.js';
 
 import { userIdGen } from '../util/idGen.js';
 import { mailingService } from '../util/nodeMailer.js';
 import {
 	registerStudent,
-	registerTeacher,
-	registerManager,
 	registerAdmin,
 } from '../util/roleRegister.js';
 
@@ -110,17 +105,11 @@ export const logout = async (req, res) => {
 
 export const register = async (req, res) => {
 	// Destructure input fields from request body
-	const { name, email, password, role, contactNumber, centre } = req.body;
+	const { name, email, password, role, contactNumber } = req.body;
 
 	// Check if all required fields are provided in the request body
-	if(!name || !email || !password || !contactNumber || !centre)
+	if(!name || !email || !password || !contactNumber)
 		return res.status(400).json({ message: 'Enter all credentials' });
-
-	// Check if the provided centre exists
-	const centreExists = await Centres.findOne({ centreID: centre });
-
-	if(!centreExists)
-		return res.status(400).json({ message: 'Centre does not exist' });
 
 	try {
 		// Check if a user with the provided email already exists
@@ -143,7 +132,6 @@ export const register = async (req, res) => {
 			password: hash,
 			role,
 			contactNumber,
-			centre
 		});
 		// Save the new user to the database
 		await newUser.save();
@@ -159,38 +147,6 @@ export const register = async (req, res) => {
 		if(role === 'Student') {
 			// Register the new student
 			await registerStudent(newUser.userID);
-
-			// Notify the manager about the new student registration
-			const managerID = centreExists.managerID;
-			const managerNotification = new Notifications({
-				userID: managerID,
-				body: `New student ${name} has registered at your centre`,
-			});
-			await managerNotification.save();
-		}
-		else if(role === 'Teacher') {
-			// Register the new teacher
-			await registerTeacher(newUser.userID);
-
-			// Notify the manager about the new teacher registration
-			const managerID = centreExists.managerID;
-			const managerNotification = new Notifications({
-				userID: managerID,
-				body: `New teacher ${name} has registered at your centre`,
-			});
-			await managerNotification.save();
-		}
-		else if(role === 'Manager') {
-			// Register the new manager
-			await registerManager(newUser.userID);
-
-			// Notify the admin about the new manager registration
-			const adminID = centreExists.adminID;
-			const adminNotification = new Notifications({
-				userID: adminID,
-				body: `New manager ${name} has registered at your centre`,
-			});
-			await adminNotification.save();
 		}
 		else if(role === 'Admin') {
 			// Register the new admin
@@ -516,111 +472,5 @@ export const getAdminProfile = async (req, res) => {
 	
 	catch(err) {
 		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
-	}
-}
-
-export const getManagerProfile = async (req, res) => {
-	const { userID } = req.user;
-	
-	try{
-		const user = await Users.findOne({ userID: userID });
-		const management = await Managers.findOne({ userID: userID });
-		
-		if(!user)
-			return res.status(400).json({ message: 'User not found' });
-		
-		const returnedUser = {
-			userID: user.userID,
-			name: user.name,
-			email: user.email,
-			role: user.role,
-			contactNumber: user.contactNumber,
-			gender: user.gender,
-			DOB: user.dateOfBirth,
-			aadhar: user.aadhar,
-			address: user.address,
-			qualification: user.highestEducation,
-			centre: user.centre,
-			salary: management.salary,
-		}
-		
-		return res.status(200).json({ message: 'User fetched successfully', returnedUser });
-	}
-	
-	catch(err) {
-		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
-	}
-}
-
-export const getTeacherProfile = async (req, res) => {
-	const { userID } = req.user;
-	
-	try{
-		const user = await Users.findOne({ userID: userID });
-		const teacher = await Teachers.findOne({ userID: userID });
-		
-		if(!user)
-			return res.status(400).json({ message: 'User not found' });
-		
-		const returnedUser = {
-			userID: user.userID,
-			name: user.name,
-			email: user.email,
-			role: user.role,
-			contactNumber: user.contactNumber,
-			gender: user.gender,
-			DOB: user.dateOfBirth,
-			aadhar: user.aadhar,
-			address: user.address,
-			qualification: user.highestEducation,
-			centre: user.centre,
-			course: teacher.courseTeaching,
-			specialization: teacher.specialization,
-			salary: teacher.salary,
-			experience: teacher.yearsOfExperience,
-			timing: teacher.timingsAllotted,
-		}
-		
-		return res.status(200).json({ message: 'User fetched successfully', returnedUser });
-	}
-	
-	catch(err) {
-		return res.status(500).json({ message: 'Cannot update profile at the moment. Please try again later' });
-	}
-}
-
-export const getStudentProfile = async (req, res) => {
-	const { userID } = req.user;
-	
-	try {
-		const user = await Users.findOne({ userID: userID });
-		const student = await Students.findOne({ userID: userID });
-		
-		if(!user)
-			return res.status(400).json({ message: 'User not found' });
-		
-		const returnedUser = {
-			userID: user.userID,
-			name: user.name,
-			email: user.email,
-			role: user.role,
-			contactNumber: user.contactNumber,
-			gender: user.gender,
-			DOB: user.dateOfBirth,
-			aadhar: user.aadhar,
-			address: user.address,
-			qualification: user.highestEducation,
-			centre: user.centre,
-			course: student.courseEnrolled,
-			timing: student.timeAllotted,
-			certificate: student.certificates,
-			fees: student.fee,
-		}
-		
-		return res.status(200).json({ message: 'User fetched successfully', returnedUser });
-	}
-	
-	catch(err) {
-		return res.status(500).json({ message: 'Cannot get student profile at the moment. Please try again later' });
 	}
 }

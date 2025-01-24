@@ -8,10 +8,10 @@ import fs from "fs";
 import QRCode from "qrcode";
 
 export const genVerifyCertificate = async (data) => {
-    registerFont("../assets/Crimson-Italic.ttf", { family: "Crimson" });
-    registerFont("../assets/AVANTE.TTF", { family: "Avante" });
+    registerFont("./assets/Crimson-Italic.ttf", { family: "Crimson" });
+    registerFont("./assets/AVANTE.TTF", { family: "Avante" });
     
-    const templatePath = "../assets/kcp_certificate_template.png";
+    const templatePath = "./assets/kcp_certificate_template.png";
     const template = await sharp(templatePath).metadata();
 
     const canvas = createCanvas(template.width, template.height);

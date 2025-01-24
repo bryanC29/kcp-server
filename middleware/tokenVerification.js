@@ -4,7 +4,7 @@ import { renewToken } from '../util/tokenRenew.js';
 
 import Users from '../model/users.js';
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = async (req, res, next) => {
     try {
         const token = req.headers.authorization?.split(' ')[1] || req.cookies.userToken;
     
@@ -13,7 +13,7 @@ export const verifyToken = (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = Users.findOne({ email: decoded.email });
+        const user = await Users.findOne({ userID: decoded.userID });
 
         if (!user)
             return res.status(401).json({ message: 'Invalid or expired token' });

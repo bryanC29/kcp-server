@@ -2,9 +2,6 @@ import { Router } from "express";
 import { verifyToken } from "../middleware/tokenVerification.js";
 
 import {
-    verifyStudent,
-    verifyTeacher,
-    verifyManager,
     verifyAdmin
 } from "../middleware/roleVerification.js";
 
@@ -15,9 +12,6 @@ import {
     forgotPassword,
     getProfile,
     getAdminProfile,
-    getManagerProfile,
-    getTeacherProfile,
-    getStudentProfile,
     getBankDetails,
     userProfileUpdate,
     userBankDetailUpdate,
@@ -28,9 +22,6 @@ const router = Router();
 
 router.use('/profile', verifyToken);
 router.use('/admin', verifyAdmin);
-router.use('/manager', verifyManager);
-router.use('/teacher', verifyTeacher);
-router.use('/student', verifyStudent);
 router.use('/bankdetails', verifyToken);
 router.use('/profileupdate', verifyToken);
 router.use('/updatebank', verifyToken);
@@ -44,9 +35,6 @@ router.route('/login').post(login);
 
 router.route('/profile').get(getProfile);
 router.route('/admin').get(getAdminProfile);
-router.route('/manager').get(getManagerProfile);
-router.route('/teacher').get(getTeacherProfile);
-router.route('/student').get(getStudentProfile);
 router.route('/bankdetails').get(getBankDetails);
 
 router.route('/profileupdate').post(userProfileUpdate);

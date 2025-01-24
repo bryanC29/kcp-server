@@ -56,7 +56,6 @@ const Users = new Schema ({
     ],
     centre : {
         type: String,
-        required: true,
     },
     dateOfJoining : {
         type: Date,
